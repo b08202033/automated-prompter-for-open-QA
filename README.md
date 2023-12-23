@@ -1,4 +1,4 @@
-# automaticed-prompter-for-open-QA
+# automated-prompter-for-open-QA
 This is the main repository for RL course final project.
 
 ## Supervised fine-tuning
