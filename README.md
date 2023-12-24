@@ -22,3 +22,8 @@ After SFT and RL,
 
 - result_of_(a).py is to evaluate prompter (a).
 - (b) (c) (e) is the same.
+
+## Execution
+All the code can be executed by direct running. For example:
+
+``python finetune.py``
