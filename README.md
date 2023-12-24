@@ -2,6 +2,8 @@
 This is the main repository for RL course final project.
 
 ## Supervised fine-tuning
+- finetune.py
+  This file is for doing supervised finetuning on prompter model, the result of this model will generate the instruction format when we give it certain prompt.
 
 ## Reinforcement learning for (d) and (e)
 - training_eval_for_(d).py
