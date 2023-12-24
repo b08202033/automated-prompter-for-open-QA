@@ -1,6 +1,10 @@
 # automated-prompter-for-open-QA
 This is the main repository for RL course final project.
 
+## Environment
+We provide our environment in ``requirements.txt`` and ``environment.yml``. You can install through any way you want. For example:
+`` pip install -r requirements.txt``
+
 ## Supervised fine-tuning
 - finetune.py
   This file is for doing supervised finetuning on prompter model, the result of this model will generate the instruction format when we give it certain prompt.
