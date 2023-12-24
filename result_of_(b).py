@@ -122,6 +122,7 @@ def evaluate(model,instruction, generation_config, max_len, input=None):
     input_ids = inputs["input_ids"].cuda()
     # 使用模型進行生成回覆
     model.eval()
+   
     generation_output = model.generate(
         input_ids=input_ids,
         generation_config=generation_config,
@@ -293,8 +294,8 @@ def eval(ppo_trainer, fix_LLM, prompter_tokenizer, fixed_tokenizer, generation_k
         query_tensors = batch["input_ids"]
         query_tensors = [q.to('cuda:0') for q in query_tensors]
         #print(query_tensors)
+
         #### Get response from SFTModel
-        
         responses = []
         for i in range(len(batch["query"])):
             responses.append(evaluate(ppo_trainer.model, batch["query"][i], generation_config, 256))
@@ -388,7 +389,7 @@ def Train(ppo_trainer, valid_dataloader, fix_LLM, prompter_tokenizer, fixed_toke
 
 if __name__ == "__main__":
     # Training configuration setup
-    wandb.login()
+    # wandb.login()
 
     config = PPOConfig(
         model_name="meta-llama/Llama-2-7b-chat-hf",
@@ -398,16 +399,16 @@ if __name__ == "__main__":
         ratio_threshold = 10,
     )
 
-    run = wandb.init(
-        # Set the project where this run will be logged
-        project="RL-project",
-        name = "ppo_add_eval",
-        # Track hyperparameters and run metadata
-        config={
-            "learning_rate": config.learning_rate,
-            "epochs": 50,
-        },
-    )
+    # run = wandb.init(
+    #     # Set the project where this run will be logged
+    #     project="RL-project",
+    #     name = "ppo_add_eval",
+    #     # Track hyperparameters and run metadata
+    #     config={
+    #         "learning_rate": config.learning_rate,
+    #         "epochs": 50,
+    #     },
+    # )
     
     #tokenizer = AutoTokenizer.from_pretrained(config.model_name, device_map={"": Accelerator().local_process_index})
     prompter_tokenizer = AutoTokenizer.from_pretrained(config.model_name, device_map="cuda:0")
@@ -501,7 +502,6 @@ if __name__ == "__main__":
         tokenizer=prompter_tokenizer,
         data_collator=collator
     )
-
-    # Testing
+    ppo_trainer.model = ppo_trainer.model.to(ppo_trainer.current_device)
     testing_score = eval(ppo_trainer, fix_LLM, prompter_tokenizer, fixed_tokenizer, generation_kwargs, test_dataloader)
     print(f"testing_score: {testing_score}")
