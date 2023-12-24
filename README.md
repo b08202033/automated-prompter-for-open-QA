@@ -4,7 +4,7 @@ This is the main repository for RL course final project.
 ## Environment
 We provide our environment in ``requirements.txt`` and ``environment.yml``. You can install through any way you want. For example:
 
-`` pip install -r requirements.txt``
+``` pip install -r requirements.txt```
 
 ## Supervised fine-tuning
 - finetune.py
@@ -26,4 +26,4 @@ After SFT and RL,
 ## Execution
 All the code can be executed by direct running. For example:
 
-``python finetune.py``
+```python finetune.py```
